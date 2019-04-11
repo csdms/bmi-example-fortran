@@ -1,6 +1,3 @@
-# Prerequisites
-*.d
-
 # Compiled Object files
 *.slo
 *.lo
@@ -30,3 +27,14 @@
 *.exe
 *.out
 *.app
+
+# pkg-config files
+*.pc
+
+# Emacs backups
+*~
+
+# Build and install directories for testing
+_build
+_install
+
