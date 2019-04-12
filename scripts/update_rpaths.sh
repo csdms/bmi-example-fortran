@@ -3,6 +3,8 @@
 
 run_install_name_tool() {
     install_name_tool \
+	-change @rpath/libbmif.dylib \
+	    ${CONDA_PREFIX}/lib/libbmif.dylib \
 	-change @rpath/libgfortran.3.dylib \
 	    ${CONDA_PREFIX}/lib/libgfortran.3.dylib \
 	-change @rpath/libquadmath.0.dylib \
