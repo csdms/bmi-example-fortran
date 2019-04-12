@@ -17,3 +17,7 @@ include_directories(${bmif_inc})
 
 add_subdirectory(heat)
 add_subdirectory(bmi_heat)
+add_subdirectory(tests)
+add_subdirectory(examples)
+
+include(CTest)
