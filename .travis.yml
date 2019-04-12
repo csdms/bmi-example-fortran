@@ -1,0 +1,42 @@
+language: generic
+
+os:
+  - linux
+  - osx
+
+env:
+  matrix:
+    - TRAVIS_PYTHON_VERSION="3.7"
+  global:
+    - CONDA_PREFIX=$HOME/conda
+    - MINICONDA_URL_BASE="https://repo.continuum.io/miniconda/Miniconda3-latest"
+
+before_install:
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      OS="MacOSX-x86_64"
+    else
+      OS="Linux-x86_64"
+    fi
+  - curl $MINICONDA_URL_BASE-$OS.sh > $HOME/miniconda.sh
+  - bash $HOME/miniconda.sh -b -p $CONDA_PREFIX
+  - export PATH="$CONDA_PREFIX/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda install python=$TRAVIS_PYTHON_VERSION
+  - conda install gfortran_$TRAVIS_OS_NAME-64 cmake
+  - conda install bmi-fortran -c csdms
+  - source activate root
+
+install:
+  - mkdir _build && cd _build
+  - cmake .. -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX
+  - make
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      source ../scripts/update_rpaths.sh
+    fi
+  - make install
+
+script:
+  - ctest
