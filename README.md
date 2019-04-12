@@ -54,11 +54,11 @@ in which the Fortran BMI bindings have been installed
 
 On macOS only, update runtime paths for all executables with
 
-    $ source ../scripts/update_rpaths
+    source ../scripts/update_rpaths
 
 Then, to install (on both Linux and macOS):
 
-    $ make install
+    make install
 
 The installation will look like:
 
@@ -81,4 +81,18 @@ The installation will look like:
 
 Run unit tests and examples of using the sample implementation with
 
-    $ ctest
+    ctest
+
+
+## Use
+
+Run the heat model through its BMI with the `run_bmiheatf` program,
+which takes a model configuration file
+(see the [examples](./examples) directory for a sample)
+as a required parameter.
+If `run_bmiheatf` is in your path, run it with
+
+    run_bmiheatf test.cfg
+
+Output from the model is written to the file **bmiheatf.out**
+in the current directory.
