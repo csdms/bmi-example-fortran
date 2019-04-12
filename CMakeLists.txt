@@ -15,5 +15,5 @@ find_library(bmif_lib bmif)
 find_path(bmif_inc bmif.mod)
 include_directories(${bmif_inc})
 
-add_subdirectory(heat_model)
+add_subdirectory(heat)
 add_subdirectory(bmi_heat)
