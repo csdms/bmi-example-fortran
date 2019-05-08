@@ -1,6 +1,6 @@
 program test_get_var_type
 
-  use bmif, only: BMI_FAILURE, BMI_MAX_TYPE_NAME
+  use bmif_1_2, only: BMI_FAILURE, BMI_MAX_TYPE_NAME
   use bmiheatf
   use fixtures, only: config_file, status
 

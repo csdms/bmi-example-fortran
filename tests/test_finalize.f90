@@ -1,6 +1,6 @@
 program test_finalize
 
-  use bmif, only: BMI_SUCCESS, BMI_FAILURE
+  use bmif_1_2, only: BMI_SUCCESS, BMI_FAILURE
   use bmiheatf
   use fixtures, only: status, config_file
 
