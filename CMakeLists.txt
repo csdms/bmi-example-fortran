@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
 project(bmi-example-fortran Fortran)
 
@@ -8,8 +8,6 @@ set(bmi_major_version 1)
 set(bmi_minor_version 2)
 
 set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/mod)
-set(CMAKE_MACOSX_RPATH 1)
-set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 
 # Locate the installed Fortran BMI bindings (bmif library and module file)
 # through CMAKE_PREFIX_PATH.
