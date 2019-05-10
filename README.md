@@ -44,8 +44,10 @@ This repository is organized with the following directories:
 
 ## Build/Install
 
-To build this example from source with cmake, run
+To build this example from source with cmake,
+using the current Fortran BMI version, run
 
+    export BMIF_VERSION=1.2
     mkdir _build && cd _build
     cmake .. -DCMAKE_INSTALL_PREFIX=<path-to-installation>
     make
@@ -62,7 +64,8 @@ Then, to install (on both Linux and macOS):
 
     make install
 
-The installation will look like:
+The installation will look like
+(on macOS, using v1.2 of the Fortran BMI specification):
 
 ```bash
 .
@@ -70,15 +73,16 @@ The installation will look like:
 |   |-- run_bmiheatf
 |   `-- run_heatf
 |-- include
-|   |-- bmif.mod
+|   |-- bmif_1_2.mod
 |   |-- bmiheatf.mod
 |   `-- heatf.mod
 `-- lib
-    |-- libbmif.dylib
+    |-- libbmif.1.2.dylib
+    |-- libbmif.dylib -> libbmif.1.2.dylib
     |-- libbmiheatf.dylib
     `-- libheatf.dylib
 
-3 directories, 8 files
+3 directories, 9 files
 ```
 
 Run unit tests and examples of using the sample implementation with

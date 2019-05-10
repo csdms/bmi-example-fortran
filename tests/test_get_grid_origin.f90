@@ -1,6 +1,6 @@
 program test_get_grid_origin
 
-  use bmif, only: BMI_FAILURE
+  use bmif_1_2, only: BMI_FAILURE
   use bmiheatf
   use fixtures, only: config_file, status
 

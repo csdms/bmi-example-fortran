@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # Updates runtime paths for executables on macOS.
 
+bmif_version=${BMIF_VERSION:-1.2}
+
 run_install_name_tool() {
     install_name_tool \
-	-change @rpath/libbmif.dylib \
-	    ${CONDA_PREFIX}/lib/libbmif.dylib \
+	-change @rpath/libbmif.$bmif_version.dylib \
+	    ${CONDA_PREFIX}/lib/libbmif.$bmif_version.dylib \
 	-change @rpath/libgfortran.3.dylib \
 	    ${CONDA_PREFIX}/lib/libgfortran.3.dylib \
 	-change @rpath/libquadmath.0.dylib \
