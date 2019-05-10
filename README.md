@@ -44,8 +44,10 @@ This repository is organized with the following directories:
 
 ## Build/Install
 
-To build this example from source with cmake, run
+To build this example from source with cmake,
+using the current Fortran BMI version, run
 
+    export BMIF_VERSION=1.2
     mkdir _build && cd _build
     cmake .. -DCMAKE_INSTALL_PREFIX=<path-to-installation>
     make

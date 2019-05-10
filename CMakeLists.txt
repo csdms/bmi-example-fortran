@@ -4,15 +4,23 @@ project(bmi-example-fortran Fortran)
 
 set(model_name heatf)
 set(bmi_name bmi${model_name})
-set(bmi_major_version 1)
-set(bmi_minor_version 2)
+
+# Determine the Fortran BMI version.
+if(DEFINED ENV{BMIF_VERSION})
+  set(bmif_version $ENV{BMIF_VERSION})
+else()
+  set(bmif_version "1.2")
+endif()
+string(REPLACE "." "_" bmif_module_version ${bmif_version})
+message("-- BMIF version - ${bmif_version}")
+message("-- BMIF module version - ${bmif_module_version}")
 
 set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/mod)
 
 # Locate the installed Fortran BMI bindings (bmif library and module file)
 # through CMAKE_PREFIX_PATH.
 find_library(bmif_lib bmif)
-find_path(bmif_inc bmif_${bmi_major_version}_${bmi_minor_version}.mod)
+find_path(bmif_inc bmif_${bmif_module_version}.mod)
 include_directories(${bmif_inc})
 
 add_subdirectory(heat)
