@@ -319,7 +319,7 @@ contains
        grid_shape = [self%model%n_y, self%model%n_x]
        bmi_status = BMI_SUCCESS
     case default
-       grid_shape = [-1]
+       grid_shape(:) = -1
        bmi_status = BMI_FAILURE
     end select
   end function heat_grid_shape
@@ -356,7 +356,7 @@ contains
        grid_spacing = [self%model%dy, self%model%dx]
        bmi_status = BMI_SUCCESS
     case default
-       grid_spacing = [-1.d0]
+       grid_spacing(:) = -1.d0
        bmi_status = BMI_FAILURE
     end select
   end function heat_grid_spacing
@@ -373,7 +373,7 @@ contains
        grid_origin = [0.d0, 0.d0]
        bmi_status = BMI_SUCCESS
     case default
-       grid_origin = [-1.d0]
+       grid_origin(:) = -1.d0
        bmi_status = BMI_FAILURE
     end select
   end function heat_grid_origin
@@ -390,7 +390,7 @@ contains
        grid_x = [0.d0]
        bmi_status = BMI_SUCCESS
     case default
-       grid_x = [-1.d0]
+       grid_x(:) = -1.d0
        bmi_status = BMI_FAILURE
     end select
   end function heat_grid_x
@@ -407,7 +407,7 @@ contains
        grid_y = [0.d0]
        bmi_status = BMI_SUCCESS
     case default
-       grid_y = [-1.d0]
+       grid_y(:) = -1.d0
        bmi_status = BMI_FAILURE
     end select
   end function heat_grid_y
@@ -424,7 +424,7 @@ contains
        grid_z = [0.d0]
        bmi_status = BMI_SUCCESS
     case default
-       grid_z = [-1.d0]
+       grid_z(:) = -1.d0
        bmi_status = BMI_FAILURE
     end select
   end function heat_grid_z
@@ -442,7 +442,7 @@ contains
        grid_conn = [0]
        bmi_status = BMI_SUCCESS
     case default
-       grid_conn = [-1]
+       grid_conn(:) = -1
        bmi_status = BMI_FAILURE
     end select
   end function heat_grid_connectivity
@@ -460,7 +460,7 @@ contains
        grid_offset = [0]
        bmi_status = BMI_SUCCESS
     case default
-       grid_offset = [-1]
+       grid_offset(:) = -1
        bmi_status = BMI_FAILURE
     end select
   end function heat_grid_offset
@@ -567,7 +567,7 @@ contains
        dest = [self%model%id]
        bmi_status = BMI_SUCCESS
     case default
-       dest = [-1]
+       dest(:) = -1
        bmi_status = BMI_FAILURE
     end select
   end function heat_get_int
@@ -597,7 +597,7 @@ contains
        dest = [self%model%alpha]
        bmi_status = BMI_SUCCESS
     case default
-       dest = [-1.0]
+       dest(:) = -1.0
        bmi_status = BMI_FAILURE
     end select
   end function heat_get_float
@@ -611,7 +611,7 @@ contains
 
     select case(var_name)
     case default
-       dest = [-1.d0]
+       dest(:) = -1.d0
        bmi_status = BMI_FAILURE
     end select
   end function heat_get_double
