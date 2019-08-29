@@ -19,15 +19,6 @@ Tests and examples of using the BMI are provided.
 The model is written in Fortran 90.
 The BMI is written in Fortran 2003.
 
-**Prerequisites:**
-* A Fortran compiler
-* CMake
-* The Fortran BMI bindings. Follow the build and install directions
-  given in the
-  [README](https://github.com/csdms/bmi-fortran/blob/master/README.md)
-  in that repository.  You can choose to build them from source or
-  install them through a conda binary (Linux and macOS only).
-
 This repository is organized with the following directories:
 
 <dl>
@@ -47,6 +38,15 @@ This repository is organized with the following directories:
 ## Build/Install
 
 This example can be built on Linux, macOS, and Windows.
+
+**Prerequisites:**
+* A Fortran compiler
+* CMake
+* The Fortran BMI bindings. Follow the build and install directions
+  given in the
+  [README](https://github.com/csdms/bmi-fortran/blob/master/README.md)
+  in that repository.  You can choose to build them from source or
+  install them through a conda binary (Linux and macOS only).
 
 ### Linux and macOS
 
