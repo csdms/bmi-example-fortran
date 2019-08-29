@@ -44,6 +44,10 @@ This repository is organized with the following directories:
 
 ## Build/Install
 
+This example can be built on Linux, macOS, and Windows.
+
+### Linux and macOS
+
 To build this example from source with cmake,
 using the current Fortran BMI version, run
 
@@ -84,6 +88,30 @@ The installation will look like
 
 3 directories, 9 files
 ```
+
+Run unit tests and examples of using the sample implementation with
+
+    ctest
+
+### Windows
+
+To configure this example from source with cmake,
+using the current Fortran BMI version, run
+
+    set "BMIF_VERSION=1.2"
+    mkdir _build && cd _build
+    cmake .. ^
+	  -G "NMake Makefiles" ^
+	  -DCMAKE_INSTALL_PREFIX=<path-to-installation> ^
+	  -DCMAKE_BUILD_TYPE=Release
+
+where `<path-to-installation>` is the base directory
+in which the Fortran BMI bindings have been installed
+(`C:\Program Files (x86)` is the default).
+
+Then, to build and install:
+
+	cmake --build . --target install --config Release
 
 Run unit tests and examples of using the sample implementation with
 
