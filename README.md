@@ -1,3 +1,4 @@
+[![Basic Model Interface](https://img.shields.io/badge/CSDMS-Basic%20Model%20Interface-green.svg)](https://bmi.readthedocs.io/)
 [![Build Status](https://travis-ci.org/csdms/bmi-example-fortran.svg?branch=master)](https://travis-ci.org/csdms/bmi-example-fortran)
 
 # bmi-example-fortran
@@ -18,13 +19,14 @@ Tests and examples of using the BMI are provided.
 The model is written in Fortran 90.
 The BMI is written in Fortran 2003.
 
-**Prerequisite:**
-The Fortran BMI bindings must be installed before building this example.
-Follow the install directions given in the
-[README](https://github.com/csdms/bmi-fortran/blob/master/README.md)
-in that repository.
-You can choose to build them from source
-or install them through a conda binary.
+**Prerequisites:**
+* A Fortran compiler
+* CMake
+* The Fortran BMI bindings. Follow the build and install directions
+  given in the
+  [README](https://github.com/csdms/bmi-fortran/blob/master/README.md)
+  in that repository.  You can choose to build them from source or
+  install them through a conda binary (Linux and macOS only).
 
 This repository is organized with the following directories:
 
