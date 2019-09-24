@@ -46,7 +46,7 @@ This example can be built on Linux, macOS, and Windows.
   given in the
   [README](https://github.com/csdms/bmi-fortran/blob/master/README.md)
   in that repository.  You can choose to build them from source or
-  install them through a conda binary (Linux and macOS only).
+  install them through a conda binary.
 
 ### Linux and macOS
 
@@ -97,8 +97,13 @@ Run unit tests and examples of using the sample implementation with
 
 ### Windows
 
+An additional prerequisite is needed for Windows:
+
+* Microsoft Visual Studio 2017 or Microsoft Build Tools for Visual Studio 2017
+
 To configure this example from source with cmake,
-using the current Fortran BMI version, run
+using the current Fortran BMI version,
+run the following in a Developer Command Prompt
 
     set "BMIF_VERSION=1.2"
     mkdir _build && cd _build
@@ -109,7 +114,8 @@ using the current Fortran BMI version, run
 
 where `<path-to-installation>` is the base directory
 in which the Fortran BMI bindings have been installed
-(`C:\Program Files (x86)` is the default).
+(`"C:\Program Files (x86)"` is the default;
+note that quotes and an absolute path are needed).
 
 Then, to build and install:
 
