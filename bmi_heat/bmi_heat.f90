@@ -38,7 +38,7 @@ module bmiheatf
      procedure :: get_grid_face_count => heat_grid_face_count
      procedure :: get_grid_edge_nodes => heat_grid_edge_nodes
      procedure :: get_grid_face_edges => heat_grid_face_edges
-     procedure :: get_grid_face_nodes => heat_grid_face_modes
+     procedure :: get_grid_face_nodes => heat_grid_face_nodes
      procedure :: get_grid_nodes_per_face => heat_grid_nodes_per_face
      procedure :: get_var_type => heat_var_type
      procedure :: get_var_units => heat_var_units
