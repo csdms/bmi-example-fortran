@@ -1,7 +1,7 @@
 module bmiheatf
 
   use heatf
-  use bmif_1_2
+  use bmif_2_0
   use, intrinsic :: iso_c_binding, only: c_ptr, c_loc, c_f_pointer
   implicit none
 
@@ -10,6 +10,8 @@ module bmiheatf
      type (heat_model) :: model
    contains
      procedure :: get_component_name => heat_component_name
+     procedure :: get_input_item_count => heat_input_item_count
+     procedure :: get_output_item_count => heat_output_item_count
      procedure :: get_input_var_names => heat_input_var_names
      procedure :: get_output_var_names => heat_output_var_names
      procedure :: initialize => heat_initialize
@@ -20,7 +22,6 @@ module bmiheatf
      procedure :: get_time_step => heat_time_step
      procedure :: get_time_units => heat_time_units
      procedure :: update => heat_update
-     procedure :: update_frac => heat_update_frac
      procedure :: update_until => heat_update_until
      procedure :: get_var_grid => heat_var_grid
      procedure :: get_grid_type => heat_grid_type
@@ -32,12 +33,18 @@ module bmiheatf
      procedure :: get_grid_x => heat_grid_x
      procedure :: get_grid_y => heat_grid_y
      procedure :: get_grid_z => heat_grid_z
-     procedure :: get_grid_connectivity => heat_grid_connectivity
-     procedure :: get_grid_offset => heat_grid_offset
+     procedure :: get_grid_node_count => heat_grid_node_count
+     procedure :: get_grid_edge_count => heat_grid_edge_count
+     procedure :: get_grid_face_count => heat_grid_face_count
+     procedure :: get_grid_edge_nodes => heat_grid_edge_nodes
+     procedure :: get_grid_face_edges => heat_grid_face_edges
+     procedure :: get_grid_face_nodes => heat_grid_face_modes
+     procedure :: get_grid_nodes_per_face => heat_grid_nodes_per_face
      procedure :: get_var_type => heat_var_type
      procedure :: get_var_units => heat_var_units
      procedure :: get_var_itemsize => heat_var_itemsize
      procedure :: get_var_nbytes => heat_var_nbytes
+     procedure :: get_var_location => heat_var_location
      procedure :: get_value_int => heat_get_int
      procedure :: get_value_float => heat_get_float
      procedure :: get_value_double => heat_get_double
@@ -102,6 +109,26 @@ contains
     name => component_name
     bmi_status = BMI_SUCCESS
   end function heat_component_name
+
+  ! Count the input variables.
+  function heat_input_item_count(self, count) result (bmi_status)
+    class (bmi_heat), intent(in) :: self
+    integer, intent(out) :: count
+    integer :: bmi_status
+
+    count = input_item_count
+    bmi_status = BMI_SUCCESS
+  end function heat_input_item_count
+
+  ! Count the output variables.
+  function heat_output_item_count(self, count) result (bmi_status)
+    class (bmi_heat), intent(in) :: self
+    integer, intent(out) :: count
+    integer :: bmi_status
+
+    count = output_item_count
+    bmi_status = BMI_SUCCESS
+  end function heat_output_item_count
 
   ! List input variables.
   function heat_input_var_names(self, names) result (bmi_status)
@@ -208,22 +235,6 @@ contains
     call advance_in_time(self%model)
     bmi_status = BMI_SUCCESS
   end function heat_update
-
-  ! Advance the model by a fraction of a time step.
-  function heat_update_frac(self, time_frac) result (bmi_status)
-    class (bmi_heat), intent(inout) :: self
-    double precision, intent(in) :: time_frac
-    integer :: bmi_status
-    real :: time_step
-
-    if (time_frac > 0.0) then
-       time_step = self%model%dt
-       self%model%dt = time_step*real(time_frac)
-       call advance_in_time(self%model)
-       self%model%dt = time_step
-    end if
-    bmi_status = BMI_SUCCESS
-  end function heat_update_frac
 
   ! Advance the model until the given time.
   function heat_update_until(self, time) result (bmi_status)
@@ -429,41 +440,82 @@ contains
     end select
   end function heat_grid_z
 
-  ! Connectivity array of unstructured grid nodes.
-  function heat_grid_connectivity(self, grid_id, grid_conn) &
-       result (bmi_status)
-    class (bmi_heat), intent(in) :: self
-    integer, intent(in) :: grid_id
-    integer, dimension(:), intent(out) :: grid_conn
+  ! Get the number of nodes in an unstructured grid.
+  function heat_grid_node_count(this, grid, count) result(bmi_status)
+    class(bmi_heat), intent(in) :: this
+    integer, intent(in) :: grid
+    integer, intent(out) :: count
     integer :: bmi_status
 
-    select case(grid_id)
-    case(1)
-       grid_conn = [0]
-       bmi_status = BMI_SUCCESS
-    case default
-       grid_conn(:) = -1
-       bmi_status = BMI_FAILURE
-    end select
-  end function heat_grid_connectivity
+    count = -1
+    bmi_status = BMI_FAILURE
+  end function heat_grid_node_count
 
-  ! Offsets of unstructured grid nodes.
-  function heat_grid_offset(self, grid_id, grid_offset) &
-       result (bmi_status)
-    class (bmi_heat), intent(in) :: self
-    integer, intent(in) :: grid_id
-    integer, dimension(:), intent(out) :: grid_offset
+  ! Get the number of edges in an unstructured grid.
+  function heat_grid_edge_count(this, grid, count) result(bmi_status)
+    class(bmi_heat), intent(in) :: this
+    integer, intent(in) :: grid
+    integer, intent(out) :: count
     integer :: bmi_status
 
-    select case(grid_id)
-    case(1)
-       grid_offset = [0]
-       bmi_status = BMI_SUCCESS
-    case default
-       grid_offset(:) = -1
-       bmi_status = BMI_FAILURE
-    end select
-  end function heat_grid_offset
+    count = -1
+    bmi_status = BMI_FAILURE
+  end function heat_grid_edge_count
+
+  ! Get the number of faces in an unstructured grid.
+  function heat_grid_face_count(this, grid, count) result(bmi_status)
+    class(bmi_heat), intent(in) :: this
+    integer, intent(in) :: grid
+    integer, intent(out) :: count
+    integer :: bmi_status
+
+    count = -1
+    bmi_status = BMI_FAILURE
+  end function heat_grid_face_count
+
+  ! Get the edge-node connectivity.
+  function heat_grid_edge_nodes(this, grid, edge_nodes) result(bmi_status)
+    class(bmi_heat), intent(in) :: this
+    integer, intent(in) :: grid
+    integer, dimension(:), intent(out) :: edge_nodes
+    integer :: bmi_status
+
+    edge_nodes(:) = -1
+    bmi_status = BMI_FAILURE
+  end function heat_grid_edge_nodes
+
+  ! Get the face-edge connectivity.
+  function heat_grid_face_edges(this, grid, face_edges) result(bmi_status)
+    class(bmi_heat), intent(in) :: this
+    integer, intent(in) :: grid
+    integer, dimension(:), intent(out) :: face_edges
+    integer :: bmi_status
+
+    face_edges(:) = -1
+    bmi_status = BMI_FAILURE
+  end function heat_grid_face_edges
+
+  ! Get the face-node connectivity.
+  function heat_grid_face_nodes(this, grid, face_nodes) result(bmi_status)
+    class(bmi_heat), intent(in) :: this
+    integer, intent(in) :: grid
+    integer, dimension(:), intent(out) :: face_nodes
+    integer :: bmi_status
+
+    face_nodes(:) = -1
+    bmi_status = BMI_FAILURE
+  end function heat_grid_face_nodes
+
+  ! Get the number of nodes for each face.
+  function heat_grid_nodes_per_face(this, grid, nodes_per_face) result(bmi_status)
+    class(bmi_heat), intent(in) :: this
+    integer, intent(in) :: grid
+    integer, dimension(:), intent(out) :: nodes_per_face
+    integer :: bmi_status
+
+    nodes_per_face(:) = -1
+    bmi_status = BMI_FAILURE
+  end function heat_grid_nodes_per_face
 
   ! The data type of the variable, as a string.
   function heat_var_type(self, var_name, var_type) result (bmi_status)
@@ -554,6 +606,20 @@ contains
        bmi_status = BMI_FAILURE
     end if
   end function heat_var_nbytes
+
+  ! The location (node, face, edge) of the given variable.
+  function heat_var_location(self, var_name, location) result (bmi_status)
+    class (bmi_heat), intent(in) :: self
+    character (len=*), intent(in) :: var_name
+    character (len=*), intent(out) :: location
+    integer :: bmi_status
+
+    select case(var_name)
+    case default
+       location = "face"
+       bmi_status = BMI_SUCCESS
+    end select
+  end function heat_var_location
 
   ! Get a copy of a integer variable's values, flattened.
   function heat_get_int(self, var_name, dest) result (bmi_status)
