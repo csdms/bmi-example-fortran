@@ -244,14 +244,17 @@ contains
     double precision :: n_steps_real
     integer :: n_steps, i, s
 
-    if (time > this%model%t) then
-       n_steps_real = (time - this%model%t) / this%model%dt
-       n_steps = floor(n_steps_real)
-       do i = 1, n_steps
-          s = this%update()
-       end do
-       s = this%update_frac(n_steps_real - dble(n_steps))
+    if (time < this%model%t) then
+       bmi_status = BMI_FAILURE
+       return
     end if
+
+    n_steps_real = (time - this%model%t) / this%model%dt
+    n_steps = floor(n_steps_real)
+    do i = 1, n_steps
+       s = this%update()
+    end do
+    call update_frac(this, n_steps_real - dble(n_steps)) ! See near bottom of file
     bmi_status = BMI_SUCCESS
   end function heat_update_until
 
@@ -902,6 +905,20 @@ contains
        bmi_status = BMI_FAILURE
     end select
   end function heat_set_at_indices_double
+
+  ! A non-BMI helper routine to advance the model by a fractional time step.
+  subroutine update_frac(this, time_frac)
+    class (bmi_heat), intent(inout) :: this
+    double precision, intent(in) :: time_frac
+    real :: time_step
+
+    if (time_frac > 0.0) then
+       time_step = this%model%dt
+       this%model%dt = time_step*real(time_frac)
+       call advance_in_time(this%model)
+       this%model%dt = time_step
+    end if
+  end subroutine update_frac
 
   ! A non-BMI procedure for model introspection.
   subroutine print_model_info(this)
