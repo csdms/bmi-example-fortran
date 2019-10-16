@@ -53,7 +53,7 @@ This example can be built on Linux, macOS, and Windows.
 To build this example from source with cmake,
 using the current Fortran BMI version, run
 
-    export BMIF_VERSION=1.2
+    export BMIF_VERSION=2.0
     mkdir _build && cd _build
     cmake .. -DCMAKE_INSTALL_PREFIX=<path-to-installation>
     make
@@ -79,12 +79,12 @@ The installation will look like
 |   |-- run_bmiheatf
 |   `-- run_heatf
 |-- include
-|   |-- bmif_1_2.mod
+|   |-- bmif_2_0.mod
 |   |-- bmiheatf.mod
 |   `-- heatf.mod
 `-- lib
-    |-- libbmif.1.2.dylib
-    |-- libbmif.dylib -> libbmif.1.2.dylib
+    |-- libbmif.2.0.dylib
+    |-- libbmif.dylib -> libbmif.2.0.dylib
     |-- libbmiheatf.dylib
     `-- libheatf.dylib
 
@@ -105,7 +105,7 @@ To configure this example from source with cmake,
 using the current Fortran BMI version,
 run the following in a Developer Command Prompt
 
-    set "BMIF_VERSION=1.2"
+    set "BMIF_VERSION=2.0"
     mkdir _build && cd _build
     cmake .. ^
 	  -G "NMake Makefiles" ^
