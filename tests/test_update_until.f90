@@ -1,6 +1,6 @@
 program test_update_until
 
-  use bmif_1_2, only: BMI_FAILURE
+  use bmif_2_0, only: BMI_FAILURE
   use bmiheatf
   use fixtures, only: config_file, status
 
