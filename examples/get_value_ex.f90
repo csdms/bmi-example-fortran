@@ -1,7 +1,7 @@
 ! Test the get_value, get_value_ptr, and get_value_at_indices functions.
 program get_value_ex
 
-  use bmif_1_2, only: BMI_MAX_VAR_NAME
+  use bmif_2_0, only: BMI_MAX_VAR_NAME
   use bmiheatf
   use testing_helpers
   implicit none

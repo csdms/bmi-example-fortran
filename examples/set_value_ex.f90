@@ -1,7 +1,7 @@
 ! Test the set_value and set_value_at_indices functions.
 program set_value_ex
 
-  use bmif_1_2, only: BMI_MAX_VAR_NAME
+  use bmif_2_0, only: BMI_MAX_VAR_NAME
   use bmiheatf
   use testing_helpers
   implicit none
