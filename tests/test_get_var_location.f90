@@ -1,4 +1,4 @@
-program test_get_var_units
+program test_get_var_location
 
   use bmif_2_0, only: BMI_FAILURE, BMI_MAX_UNITS_NAME
   use bmiheatf
@@ -7,16 +7,19 @@ program test_get_var_units
   implicit none
 
   character (len=*), parameter :: var_name = "plate_surface__temperature"
-  character (len=*), parameter :: expected_units = "K"
+  character (len=*), parameter :: expected_location = "face"
 
   type (bmi_heat) :: m
-  character (len=BMI_MAX_UNITS_NAME) :: var_units
+  character (len=BMI_MAX_UNITS_NAME) :: location
 
   status = m%initialize(config_file)
-  status = m%get_var_units(var_name, var_units)
+  status = m%get_var_location(var_name, location)
   status = m%finalize()
 
-  if (var_units.ne.expected_units) then
+  print *, location
+  print *, expected_location
+
+  if (location /= expected_location) then
      stop BMI_FAILURE
   end if
-end program test_get_var_units
+end program test_get_var_location

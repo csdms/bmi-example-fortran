@@ -1,6 +1,6 @@
 program test_initialize
 
-  use bmif_1_2, only: BMI_SUCCESS
+  use bmif_2_0, only: BMI_SUCCESS
   use bmiheatf
   use fixtures, only: status
 

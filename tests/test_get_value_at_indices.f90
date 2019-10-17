@@ -1,6 +1,6 @@
 program test_get_value_at_indices
 
-  use bmif_1_2, only: BMI_SUCCESS, BMI_FAILURE
+  use bmif_2_0, only: BMI_SUCCESS, BMI_FAILURE
   use bmiheatf
   use fixtures, only: status, print_array
 

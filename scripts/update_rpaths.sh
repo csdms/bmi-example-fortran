@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Updates runtime paths for executables on macOS.
 
-bmif_version=${BMIF_VERSION:-1.2}
+bmif_version=${BMIF_VERSION:-2.0}
 
 run_install_name_tool() {
     install_name_tool \

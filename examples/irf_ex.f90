@@ -1,7 +1,7 @@
 ! Test the lifecycle and time BMI methods.
 program irf_test
 
-  use bmif_1_2, only: BMI_MAX_UNITS_NAME
+  use bmif_2_0, only: BMI_MAX_UNITS_NAME
   use bmiheatf
   implicit none
 
@@ -42,7 +42,7 @@ program irf_test
   write (*,"(a)") "Update a fraction of a time step"
   s = m%get_current_time(time0)
   write (*,"(a30, f8.2)") "Start time: ", time0
-  s = m%update_frac(0.d5)
+  s = m%update_until(time0 + 0.d5)
   s = m%get_current_time(time1)
   write (*,"(a30, f8.2)") "Stop time: ", time1
 

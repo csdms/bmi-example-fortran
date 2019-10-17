@@ -23,10 +23,8 @@ before_install:
   - export PATH="$CONDA_PREFIX/bin:$PATH"
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
-  - conda install python=$TRAVIS_PYTHON_VERSION
-  - conda install gfortran_$TRAVIS_OS_NAME-64 cmake
-  - conda install bmi-fortran -c csdms
-  - source activate root
+  - conda create -n _test python=$TRAVIS_PYTHON_VERSION fortran-compiler cmake bmi-fortran -c conda-forge
+  - source activate _test
 
 install:
   - mkdir _build && cd _build
@@ -39,8 +37,4 @@ install:
   - make install
 
 script:
-  - |
-    if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      SKIP=get_value_ex
-    fi
-  - ctest --output-on-failure -E $SKIP
+  - ctest --output-on-failure

@@ -1,4 +1,4 @@
-program test_update
+program test_get_input_item_count
 
   use bmif_2_0, only: BMI_FAILURE
   use bmiheatf
@@ -6,17 +6,16 @@ program test_update
 
   implicit none
 
-  double precision, parameter :: expected_time = 1.d0
+  integer, parameter :: expected_count = 3
 
   type (bmi_heat) :: m
-  double precision :: time
+  integer :: count
 
   status = m%initialize(config_file)
-  status = m%update()
-  status = m%get_current_time(time)
+  status = m%get_input_item_count(count)
   status = m%finalize()
 
-  if (time.ne.expected_time) then
+  if (count /= expected_count) then
      stop BMI_FAILURE
   end if
-end program test_update
+end program test_get_input_item_count
