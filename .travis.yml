@@ -23,9 +23,8 @@ before_install:
   - export PATH="$CONDA_PREFIX/bin:$PATH"
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
-  - conda install python=$TRAVIS_PYTHON_VERSION
-  - conda install gfortran_$TRAVIS_OS_NAME-64 cmake
-  - conda install bmi-fortran -c csdms
+  - conda install python=$TRAVIS_PYTHON_VERSION -c conda-forge
+  - conda install fortran-compiler cmake bmi-fortran -c conda-forge
   - source activate root
 
 install:
