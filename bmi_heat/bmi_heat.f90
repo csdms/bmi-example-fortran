@@ -330,7 +330,7 @@ contains
 
     select case(grid)
     case(0)
-       shape = [this%model%n_y, this%model%n_x]
+       shape(:) = [this%model%n_y, this%model%n_x]
        bmi_status = BMI_SUCCESS
     case default
        shape(:) = -1
@@ -367,7 +367,7 @@ contains
 
     select case(grid)
     case(0)
-       spacing = [this%model%dy, this%model%dx]
+       spacing(:) = [this%model%dy, this%model%dx]
        bmi_status = BMI_SUCCESS
     case default
        spacing(:) = -1.d0
@@ -384,7 +384,7 @@ contains
 
     select case(grid)
     case(0)
-       origin = [0.d0, 0.d0]
+       origin(:) = [0.d0, 0.d0]
        bmi_status = BMI_SUCCESS
     case default
        origin(:) = -1.d0
@@ -401,7 +401,7 @@ contains
 
     select case(grid)
     case(1)
-       x = [0.d0]
+       x(:) = [0.d0]
        bmi_status = BMI_SUCCESS
     case default
        x(:) = -1.d0
@@ -418,7 +418,7 @@ contains
 
     select case(grid)
     case(1)
-       y = [0.d0]
+       y(:) = [0.d0]
        bmi_status = BMI_SUCCESS
     case default
        y(:) = -1.d0
@@ -435,7 +435,7 @@ contains
 
     select case(grid)
     case(1)
-       z = [0.d0]
+       z(:) = [0.d0]
        bmi_status = BMI_SUCCESS
     case default
        z(:) = -1.d0
