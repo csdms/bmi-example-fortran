@@ -450,8 +450,13 @@ contains
     integer, intent(out) :: count
     integer :: bmi_status
 
-    count = -1
-    bmi_status = BMI_FAILURE
+    select case(grid)
+    case(0:1)
+       bmi_status = this%get_grid_size(grid, count)
+    case default
+       count = -1
+       bmi_status = BMI_FAILURE
+    end select
   end function heat_grid_node_count
 
   ! Get the number of edges in an unstructured grid.
