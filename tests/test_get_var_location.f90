@@ -7,7 +7,7 @@ program test_get_var_location
   implicit none
 
   character (len=*), parameter :: var_name = "plate_surface__temperature"
-  character (len=*), parameter :: expected_location = "face"
+  character (len=*), parameter :: expected_location = "node"
 
   type (bmi_heat) :: m
   character (len=BMI_MAX_UNITS_NAME) :: location

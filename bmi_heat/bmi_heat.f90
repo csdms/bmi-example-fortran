@@ -624,7 +624,7 @@ contains
 
     select case(name)
     case default
-       location = "face"
+       location = "node"
        bmi_status = BMI_SUCCESS
     end select
   end function heat_var_location
