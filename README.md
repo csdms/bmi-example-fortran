@@ -91,7 +91,8 @@ The installation will look like
 3 directories, 9 files
 ```
 
-Run unit tests and examples of using the sample implementation with
+From the build directory,
+run unit tests and examples of using the sample implementation with
 
     ctest
 
@@ -121,7 +122,8 @@ Then, to build and install:
 
 	cmake --build . --target install --config Release
 
-Run unit tests and examples of using the sample implementation with
+From the build directory,
+run unit tests and examples of using the sample implementation with
 
     ctest
 
