@@ -71,7 +71,7 @@ Then, to install (on both Linux and macOS):
     make install
 
 The installation will look like
-(on macOS, using v1.2 of the Fortran BMI specification):
+(on macOS, using v2.0 of the Fortran BMI specification):
 
 ```bash
 .
