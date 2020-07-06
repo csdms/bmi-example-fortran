@@ -61,6 +61,8 @@ using the current Fortran BMI version, run
 where `<path-to-installation>` is the base directory
 in which the Fortran BMI bindings have been installed
 (`/usr/local` is the default).
+When installing into a conda environment,
+use the `CONDA_PREFIX` environment variable.
 
 On macOS only, update runtime paths for all executables with
 
@@ -117,6 +119,8 @@ where `<path-to-installation>` is the base directory
 in which the Fortran BMI bindings have been installed
 (`"C:\Program Files (x86)"` is the default;
 note that quotes and an absolute path are needed).
+When installing into a conda environment,
+use the `%CONDA_PREFIX%` environment variable.
 
 Then, to build and install:
 
