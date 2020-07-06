@@ -104,7 +104,7 @@ An additional prerequisite is needed for Windows:
 
 To configure this example from source with cmake
 using the current Fortran BMI version,
-run the following in a Developer Command Prompt
+run the following in a [Developer Command Prompt](https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs)
 
     set "BMIF_VERSION=2.0"
     mkdir _build && cd _build
