@@ -102,7 +102,7 @@ An additional prerequisite is needed for Windows:
 
 * Microsoft Visual Studio 2017 or Microsoft Build Tools for Visual Studio 2017
 
-To configure this example from source with cmake,
+To configure this example from source with cmake
 using the current Fortran BMI version,
 run the following in a Developer Command Prompt
 
