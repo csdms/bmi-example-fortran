@@ -6,10 +6,10 @@ os:
 
 env:
   matrix:
-    - TRAVIS_PYTHON_VERSION="3.7"
+    - TRAVIS_PYTHON_VERSION="3.8"
   global:
     - CONDA_PREFIX=$HOME/conda
-    - MINICONDA_URL_BASE="https://repo.continuum.io/miniconda/Miniconda3-latest"
+    - MINICONDA_URL_BASE="https://repo.anaconda.com/miniconda/Miniconda3-latest"
 
 before_install:
   - |

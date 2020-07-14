@@ -61,6 +61,8 @@ using the current Fortran BMI version, run
 where `<path-to-installation>` is the base directory
 in which the Fortran BMI bindings have been installed
 (`/usr/local` is the default).
+When installing into a conda environment,
+use the `CONDA_PREFIX` environment variable.
 
 On macOS only, update runtime paths for all executables with
 
@@ -71,7 +73,7 @@ Then, to install (on both Linux and macOS):
     make install
 
 The installation will look like
-(on macOS, using v1.2 of the Fortran BMI specification):
+(on macOS, using v2.0 of the Fortran BMI specification):
 
 ```bash
 .
@@ -91,7 +93,8 @@ The installation will look like
 3 directories, 9 files
 ```
 
-Run unit tests and examples of using the sample implementation with
+From the build directory,
+run unit tests and examples of using the sample implementation with
 
     ctest
 
@@ -101,9 +104,9 @@ An additional prerequisite is needed for Windows:
 
 * Microsoft Visual Studio 2017 or Microsoft Build Tools for Visual Studio 2017
 
-To configure this example from source with cmake,
+To configure this example from source with cmake
 using the current Fortran BMI version,
-run the following in a Developer Command Prompt
+run the following in a [Developer Command Prompt](https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs)
 
     set "BMIF_VERSION=2.0"
     mkdir _build && cd _build
@@ -116,12 +119,15 @@ where `<path-to-installation>` is the base directory
 in which the Fortran BMI bindings have been installed
 (`"C:\Program Files (x86)"` is the default;
 note that quotes and an absolute path are needed).
+When installing into a conda environment,
+use the `%CONDA_PREFIX%` environment variable.
 
 Then, to build and install:
 
 	cmake --build . --target install --config Release
 
-Run unit tests and examples of using the sample implementation with
+From the build directory,
+run unit tests and examples of using the sample implementation with
 
     ctest
 
