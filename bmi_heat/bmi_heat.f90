@@ -563,7 +563,7 @@ contains
        units = "m2 s-1"
        bmi_status = BMI_SUCCESS
     case("model__identification_number")
-       units = "-"
+       units = "1"
        bmi_status = BMI_SUCCESS
     case default
        units = "-"
