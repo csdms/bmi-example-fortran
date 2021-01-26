@@ -1,5 +1,5 @@
 [![Basic Model Interface](https://img.shields.io/badge/CSDMS-Basic%20Model%20Interface-green.svg)](https://bmi.readthedocs.io/)
-[![Build Status](https://travis-ci.org/csdms/bmi-example-fortran.svg?branch=master)](https://travis-ci.org/csdms/bmi-example-fortran)
+[![Build/Test](https://github.com/csdms/bmi-example-fortran/workflows/Build/Test/badge.svg)](https://github.com/csdms/bmi-example-fortran/actions?query=workflow%3ABuild%2FTest)
 
 # bmi-example-fortran
 
