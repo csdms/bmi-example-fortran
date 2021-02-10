@@ -112,8 +112,8 @@ contains
     dy2 = model%dy**2
     coef = model%alpha * model%dt / (2. * (dx2 + dy2))
 
-    do i = 2, model%n_y-1
-       do j = 2, model%n_x-1
+    do j = 2, model%n_x-1
+       do i = 2, model%n_y-1
           model%temperature_tmp(i,j) = &
                model%temperature(i,j) + coef * ( &
                dx2*(model%temperature(i-1,j) + model%temperature(i+1,j)) + &
