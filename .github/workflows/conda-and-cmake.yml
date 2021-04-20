@@ -43,8 +43,21 @@ jobs:
 
       - name: Build
         working-directory: ${{ github.workspace }}/build
-        run: cmake --build . --config ${{ matrix.build-type }}
+        run: cmake --build . --target install --config ${{ matrix.build-type }}
 
       - name: Test
         working-directory: ${{ github.workspace }}/build
         run: ctest -C ${{ matrix.build-type }} --output-on-failure
+
+      - name: Memcheck
+        if: matrix.os == 'ubuntu-latest'
+        working-directory: ${{ github.workspace }}/examples
+        run: |
+          conda install -c conda-forge valgrind
+          valgrind \
+            --tool=memcheck \
+            --leak-check=yes \
+            --show-reachable=yes \
+            --num-callers=20 \
+            --track-fds=yes \
+            run_bmiheatf test1.cfg
