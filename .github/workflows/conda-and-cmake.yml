@@ -56,7 +56,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         working-directory: ${{ github.workspace }}/examples
         run: |
-          conda install -c conda-forge valgrind
+          sudo apt-get install -y valgrind
           valgrind \
             --tool=memcheck \
             --leak-check=yes \
