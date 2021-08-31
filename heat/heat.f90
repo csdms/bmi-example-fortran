@@ -73,12 +73,18 @@ contains
   subroutine set_boundary_conditions(z)
     implicit none
     real, dimension (:,:), intent (out) :: z
-    integer :: i, top_x
+    integer :: i, nx, ny
 
-    top_x = size(z, 2)-1
+    nx = size(z, 2)
+    ny = size(z, 1)
 
-    do i = 0, top_x
-       z(1,i+1) = 0.25*top_x**2 - (i - 0.5*top_x)**2
+    do i = 1, nx-1
+       z(1,i) = 0.
+       z(ny-1,i) = 0.
+    end do
+    do i = 1, ny-1
+       z(i,1) = 0.
+       z(i,nx-1) = 0.
     end do
   end subroutine set_boundary_conditions
 
