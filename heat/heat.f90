@@ -54,10 +54,10 @@ contains
     type (heat_model), intent (inout) :: model
 
     model%id = 0
-    model%t = 0.
-    model%dt = 1.
     model%dx = 1.
     model%dy = 1.
+    model%t = 0.
+    model%dt = 1. / (4. * model%alpha)
 
     allocate(model%temperature(model%n_y, model%n_x))
     allocate(model%temperature_tmp(model%n_y, model%n_x))
