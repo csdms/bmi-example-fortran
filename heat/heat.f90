@@ -62,8 +62,8 @@ contains
     allocate(model%temperature(model%n_y, model%n_x))
     allocate(model%temperature_tmp(model%n_y, model%n_x))
 
-    model%temperature = 0.
-    model%temperature_tmp = 0.
+    call random_number(model%temperature)
+    call random_number(model%temperature_tmp)
 
     call set_boundary_conditions(model%temperature)
     call set_boundary_conditions(model%temperature_tmp)
