@@ -78,13 +78,13 @@ contains
     nx = size(z, 2)
     ny = size(z, 1)
 
-    do i = 1, nx-1
+    do i = 1, nx
        z(1,i) = 0.
-       z(ny-1,i) = 0.
+       z(ny,i) = 0.
     end do
-    do i = 1, ny-1
+    do i = 1, ny
        z(i,1) = 0.
-       z(i,nx-1) = 0.
+       z(i,nx) = 0.
     end do
   end subroutine set_boundary_conditions
 
