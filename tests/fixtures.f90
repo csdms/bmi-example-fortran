@@ -3,6 +3,7 @@ module fixtures
   implicit none
 
   character (len=*), parameter :: config_file = ""
+  double precision, parameter :: tolerance  = 0.001d0
 
   integer :: status
 

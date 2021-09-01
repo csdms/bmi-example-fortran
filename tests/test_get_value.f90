@@ -35,7 +35,7 @@ contains
     integer, parameter :: size = 50
     integer, parameter, dimension(rank) :: shape = (/ 10, 5 /)
     real, parameter, dimension(shape(2)) :: &
-         expected = (/ 0.0, 3.0, 4.0, 3.0, 0.0 /)
+         expected = (/ 0.0, 0.0, 0.0, 0.0, 0.0 /)
     real :: tval(size)
     integer :: i, code
 
