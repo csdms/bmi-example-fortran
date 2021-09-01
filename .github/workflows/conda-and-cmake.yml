@@ -37,7 +37,7 @@ jobs:
 
       - name: Install build tools and dependencies into env
         run: |
-          conda install -c conda-forge fortran-compiler cmake bmi-fortran
+          conda install -c conda-forge --override-channels fortran-compiler cmake bmi-fortran
           conda list
 
       - name: Make cmake build directory
