@@ -2,7 +2,7 @@ program test_update_until
 
   use bmif_2_0, only: BMI_FAILURE, BMI_SUCCESS
   use bmiheatf
-  use fixtures, only: config_file, status
+  use fixtures, only: config_file, status, tolerance
 
   implicit none
 
@@ -41,13 +41,13 @@ contains
     print *, expected_time
 
     code = BMI_SUCCESS
-    if (time.ne.expected_time) then
+    if (abs(time - expected_time) > tolerance) then
        code = BMI_FAILURE
     end if
   end function test_more_than_dt
 
   function test_less_than_dt() result(code)
-    double precision, parameter :: expected_time = 0.5d0
+    double precision, parameter :: expected_time = 0.1d0
     double precision :: time
     integer :: code
 
@@ -61,17 +61,18 @@ contains
     print *, expected_time
 
     code = BMI_SUCCESS
-    if (time.ne.expected_time) then
+    if (abs(time - expected_time) > tolerance) then
        code = BMI_FAILURE
     end if
   end function test_less_than_dt
 
   function test_multiple_of_dt() result(code)
-    double precision, parameter :: expected_time = 3.0d0
-    double precision :: time
+    double precision :: time, dt, expected_time
     integer :: code
 
     status = m%initialize(config_file)
+    status = m%get_time_step(dt)
+    expected_time = 3 * dt
     status = m%update_until(expected_time)
     status = m%get_current_time(time)
     status = m%finalize()
@@ -81,7 +82,7 @@ contains
     print *, expected_time
 
     code = BMI_SUCCESS
-    if (time.ne.expected_time) then
+    if (abs(time - expected_time) > tolerance) then
        code = BMI_FAILURE
     end if
   end function test_multiple_of_dt

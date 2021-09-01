@@ -11,7 +11,7 @@ program test_get_value_ptr
   integer, parameter :: rank = 2
   integer, parameter, dimension(rank) :: shape = (/ 10, 5 /)
   real, parameter, dimension(shape(2)) :: &
-       expected = (/ 0.0, 3.0, 4.0, 3.0, 0.0 /)
+       expected = (/ 0.0, 0.0, 0.0, 0.0, 0.0 /)
   integer :: retcode
 
   retcode = run_test()

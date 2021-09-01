@@ -4,6 +4,10 @@ on: [push, pull_request]
 
 jobs:
   build-linux-and-macos:
+    if:
+      github.event_name == 'push' || github.event.pull_request.head.repo.full_name !=
+      github.repository
+
     runs-on: ${{ matrix.os }}
 
     defaults:
@@ -27,11 +31,13 @@ jobs:
           channel-priority: true
 
       - name: Show conda installation info
-        run: conda info
+        run: |
+          conda info
+          conda list
 
       - name: Install build tools and dependencies into env
         run: |
-          conda install fortran-compiler cmake bmi-fortran
+          conda install -c conda-forge --override-channels fortran-compiler cmake bmi-fortran
           conda list
 
       - name: Make cmake build directory

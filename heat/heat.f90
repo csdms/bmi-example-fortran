@@ -54,16 +54,16 @@ contains
     type (heat_model), intent (inout) :: model
 
     model%id = 0
-    model%t = 0.
-    model%dt = 1.
     model%dx = 1.
     model%dy = 1.
+    model%t = 0.
+    model%dt = 1. / (4. * model%alpha)
 
     allocate(model%temperature(model%n_y, model%n_x))
     allocate(model%temperature_tmp(model%n_y, model%n_x))
 
-    model%temperature = 0.
-    model%temperature_tmp = 0.
+    call random_number(model%temperature)
+    call random_number(model%temperature_tmp)
 
     call set_boundary_conditions(model%temperature)
     call set_boundary_conditions(model%temperature_tmp)
@@ -73,12 +73,18 @@ contains
   subroutine set_boundary_conditions(z)
     implicit none
     real, dimension (:,:), intent (out) :: z
-    integer :: i, top_x
+    integer :: i, nx, ny
 
-    top_x = size(z, 2)-1
+    nx = size(z, 2)
+    ny = size(z, 1)
 
-    do i = 0, top_x
-       z(1,i+1) = 0.25*top_x**2 - (i - 0.5*top_x)**2
+    do i = 1, nx
+       z(1,i) = 0.
+       z(ny,i) = 0.
+    end do
+    do i = 1, ny
+       z(i,1) = 0.
+       z(i,nx) = 0.
     end do
   end subroutine set_boundary_conditions
 

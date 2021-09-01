@@ -13,7 +13,7 @@ program test_get_value_at_indices
   integer, parameter, dimension(shape(2)) :: &
        indices = (/ 1, 11, 21, 31, 41 /)
   real, parameter, dimension(shape(2)) :: &
-       expected = (/ 0.0, 3.0, 4.0, 3.0, 0.0 /)
+       expected = (/ 0.0, 0.0, 0.0, 0.0, 0.0 /)
   integer :: retcode
 
   retcode = run_test()
