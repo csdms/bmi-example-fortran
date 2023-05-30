@@ -29,7 +29,7 @@ message("-- bmif_inc - ${bmif_inc}")
 
 add_subdirectory(heat)
 add_subdirectory(bmi_heat)
-add_subdirectory(tests)
-add_subdirectory(examples)
+add_subdirectory(test)
+add_subdirectory(example)
 
 include(CTest)

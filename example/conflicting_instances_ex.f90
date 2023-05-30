@@ -8,6 +8,7 @@ program conflicting_instances_ex
 
   type (bmi_heat) :: m1
   type (bmi_heat) :: m2
+  character (len=256) :: cfg_dir
   character (len=BMI_MAX_VAR_NAME) :: &
        cfg_file1 = "test1.cfg", cfg_file2 = "test2.cfg"
   integer :: s
@@ -16,6 +17,11 @@ program conflicting_instances_ex
   integer :: grid_size1, grid_size2, dims1(2), dims2(2)
   real, allocatable :: z1(:), z2(:)
   character(len=30) :: rowfmt1, rowfmt2
+
+  ! Prepend the config file paths with the correct directory
+  call get_command_argument(1, cfg_dir)
+  cfg_file1 = trim(cfg_dir) // "/" // trim(cfg_file1)
+  cfg_file2 = trim(cfg_dir) // "/" // trim(cfg_file2)
 
   write(*, "(a, a10, a10)") "Configuration files: ", cfg_file1, cfg_file2
 
