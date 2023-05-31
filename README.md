@@ -46,7 +46,8 @@ This example can be built on Linux, macOS, and Windows.
   install directions given in the
   [README](https://github.com/csdms/bmi-fortran/blob/master/README.md)
   in that repository.  You can choose to build them from source or
-  install them through a conda binary.
+  install them through a conda binary. If using fpm, the binding
+  will be automatically downloaded and built for you.
 
 ### CMake - Linux and macOS
 
