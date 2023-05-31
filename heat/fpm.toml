@@ -1,0 +1,19 @@
+name = "heatf"
+version = "1.0"
+license = "MIT"
+
+[library]
+source-dir = "./"
+
+[[executable]]
+name = "run_heatf"
+source-dir = "./"
+main = "main.f90"
+
+[install]
+library = true
+
+[build]
+auto-executables = false
+auto-examples = false
+auto-tests = false

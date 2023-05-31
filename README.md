@@ -164,7 +164,14 @@ Similarly, `example` tells the example executables to look in the
     fpm run --example <example-name> -- example
 
 Where `<example-name>` is the name of the example to run. To see
-a list of available examples, run `fpm run --example`.
+a list of available examples, run `fpm run --example`. Note that the
+non-BMI heat model executable is not built by default when using fpm.
+If you want to build and install this too, you can do so from the
+heat directory:
+
+    cd heat
+    fpm build --profile release
+    fpm install --prefix <path-to-installation>
 
 
 ## Use
@@ -179,3 +186,8 @@ If `run_bmiheatf` is in your path, run it with
 
 Output from the model is written to the file **bmiheatf.out**
 in the current directory.
+
+If you built the model using fpm, you can alternatively run the
+program using
+
+    fpm run -- test.cfg
