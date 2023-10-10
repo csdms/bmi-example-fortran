@@ -3,7 +3,7 @@ name: Build/Test
 on: [push, pull_request]
 
 jobs:
-  build-linux-and-macos:
+  build-test-unix:
     if:
       github.event_name == 'push' || github.event.pull_request.head.repo.full_name !=
       github.repository
@@ -17,33 +17,24 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        python-version: ["3.8"]
         build-type: [Release]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: conda-incubator/setup-miniconda@v2
+      - uses: mamba-org/setup-micromamba@v1
         with:
-          auto-update-conda: true
-          python-version: ${{ matrix.python-version }}
-          channels: conda-forge
-          channel-priority: true
+          micromamba-version: latest
+          environment-name: testing
+          create-args: >-
+            cmake
+            fortran-compiler
+            bmi-fortran
 
-      - name: Show conda installation info
-        run: |
-          conda info
-          conda list
-
-      - name: Install build tools and dependencies into env
-        run: |
-          conda install -c conda-forge --override-channels fortran-compiler cmake bmi-fortran
-          conda list
-
-      - name: Make cmake build directory
+      - name: Make CMake build directory
         run: cmake -E make_directory build
 
-      - name: Configure cmake
+      - name: Configure CMake
         working-directory: ${{ github.workspace }}/build
         run: |
           cmake $GITHUB_WORKSPACE \
@@ -62,6 +53,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         working-directory: ${{ github.workspace }}/example
         run: |
+          sudo apt-get update
           sudo apt-get install -y valgrind
           valgrind \
             --tool=memcheck \

@@ -29,7 +29,7 @@ This repository is organized with the following directories:
     model through its BMI</dd>
 	<dt>test</dt>
 	<dd>Unit tests for the BMI-ed model</dd>
-    <dt>examples</dt>
+    <dt>example</dt>
 	<dd>Examples of controlling the model through its BMI</dd>
     <dt>scripts</dt>
 	<dd>Helper scripts</dd>
@@ -51,7 +51,7 @@ This example can be built on Linux, macOS, and Windows.
 
 ### CMake - Linux and macOS
 
-To build this example from source with cmake,
+To build this example from source with CMake,
 using the current Fortran BMI version, run
 
     export BMIF_VERSION=2.0
@@ -63,11 +63,7 @@ where `<path-to-installation>` is the base directory
 in which the Fortran BMI bindings have been installed
 (`/usr/local` is the default).
 When installing into a conda environment,
-use the `CONDA_PREFIX` environment variable.
-
-On macOS only, update runtime paths for all executables with
-
-    source ../scripts/update_rpaths
+use the `$CONDA_PREFIX` environment variable.
 
 Then, to install (on both Linux and macOS):
 
@@ -179,11 +175,11 @@ heat directory:
 
 Run the heat model through its BMI with the `run_bmiheatf` program,
 which takes a model configuration file
-(see the [examples](./examples) directory for a sample)
+(see the [example](./example) directory for a sample)
 as a required parameter.
 If `run_bmiheatf` is in your path, run it with
 
-    run_bmiheatf test.cfg
+    run_bmiheatf test1.cfg
 
 Output from the model is written to the file **bmiheatf.out**
 in the current directory.
