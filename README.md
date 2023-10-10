@@ -27,7 +27,7 @@ This repository is organized with the following directories:
     <dt>bmi_heat</dt>
 	<dd>Holds the BMI for the model and a main program to run the
     model through its BMI</dd>
-	<dt>tests</dt>
+	<dt>test</dt>
 	<dd>Unit tests for the BMI-ed model</dd>
     <dt>examples</dt>
 	<dd>Examples of controlling the model through its BMI</dd>
@@ -41,14 +41,15 @@ This example can be built on Linux, macOS, and Windows.
 
 **Prerequisites:**
 * A Fortran compiler
-* CMake
-* The Fortran BMI bindings. Follow the build and install directions
-  given in the
+* CMake or [Fortran Package Manager](https://fpm.fortran-lang.org/)
+* If using CMake, the Fortran BMI bindings. Follow the build and
+  install directions given in the
   [README](https://github.com/csdms/bmi-fortran/blob/master/README.md)
   in that repository.  You can choose to build them from source or
-  install them through a conda binary.
+  install them through a conda binary. If using fpm, the binding
+  will be automatically downloaded and built for you.
 
-### Linux and macOS
+### CMake - Linux and macOS
 
 To build this example from source with cmake,
 using the current Fortran BMI version, run
@@ -98,7 +99,7 @@ run unit tests and examples of using the sample implementation with
 
     ctest
 
-### Windows
+### CMake - Windows
 
 An additional prerequisite is needed for Windows:
 
@@ -132,6 +133,48 @@ run unit tests and examples of using the sample implementation with
     ctest
 
 
+### Fortran Package Manager (fpm)
+
+If you don't already have fpm installed, you can do so via Conda:
+
+    conda install fpm -c conda-forge
+
+Then, to build and install:
+
+    fpm build --profile release
+    fpm install --prefix <path-to-installation>
+
+where `<path-to-installation>` is the base directory in which to
+install the model. Installation is optional.
+
+To run the tests:
+
+    fpm test -- test/sample.cfg
+
+Here, `test/sample.cfg` is passed as a command line parameter to the
+run executables, and tells the tests where to find the test config
+file.
+
+To run all of the examples:
+
+    fpm run --example --all -- example
+
+Similarly, `example` tells the example executables to look in the
+`example` directory for config files. To run individual tests:
+
+    fpm run --example <example-name> -- example
+
+Where `<example-name>` is the name of the example to run. To see
+a list of available examples, run `fpm run --example`. Note that the
+non-BMI heat model executable is not built by default when using fpm.
+If you want to build and install this too, you can do so from the
+heat directory:
+
+    cd heat
+    fpm build --profile release
+    fpm install --prefix <path-to-installation>
+
+
 ## Use
 
 Run the heat model through its BMI with the `run_bmiheatf` program,
@@ -144,3 +187,8 @@ If `run_bmiheatf` is in your path, run it with
 
 Output from the model is written to the file **bmiheatf.out**
 in the current directory.
+
+If you built the model using fpm, you can alternatively run the
+program using
+
+    fpm run -- test.cfg

@@ -7,10 +7,13 @@ program test_initialize
   implicit none
 
   character (len=*), parameter :: config_file1 = ""
-  character (len=*), parameter :: config_file2 = "sample.cfg"
+  character (len=256) :: config_file2
 
   type (bmi_heat) :: m
   integer :: status1, status2
+
+  ! Get the path to the config file from command line params
+  call get_command_argument(1, config_file2)
 
   status1 = m%initialize(config_file1)
   status = m%finalize()
@@ -18,7 +21,7 @@ program test_initialize
      stop 1
   end if
 
-  status2 = m%initialize(config_file2)
+  status2 = m%initialize(trim(config_file2))
   status = m%finalize()
   if (status2.ne.BMI_SUCCESS) then
      stop 2

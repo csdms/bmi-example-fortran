@@ -3,7 +3,7 @@ include(CTest)
 include_directories(${CMAKE_Fortran_MODULE_DIRECTORY})
 
 function(make_test test_name)
-  add_test(NAME ${test_name} COMMAND ${test_name})
+  add_test(NAME ${test_name} COMMAND ${test_name} "${CMAKE_CURRENT_SOURCE_DIR}/sample.cfg")
   add_executable(${test_name} ${test_name}.f90 fixtures.f90)
   target_link_libraries(${test_name} ${bmi_name})
 endfunction(make_test)
@@ -50,7 +50,3 @@ make_test(test_get_value_at_indices)
 make_test(test_by_reference)
 make_test(test_set_value)
 make_test(test_set_value_at_indices)
-
-file(
-  COPY ${CMAKE_CURRENT_SOURCE_DIR}/sample.cfg
-  DESTINATION ${CMAKE_BINARY_DIR}/tests)

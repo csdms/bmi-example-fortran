@@ -6,11 +6,14 @@ program test_by_reference
 
   implicit none
 
-  character (len=*), parameter :: config_file = "sample.cfg"
+  character (len=256) :: config_file
   character (len=*), parameter :: var_name = "plate_surface__temperature"
   integer, parameter :: grid_id = 0
   integer, parameter :: rank = 2
   integer :: retcode
+
+  ! Get the path to the config file from command line params
+  call get_command_argument(1, config_file)
 
   retcode = run_test()
   if (retcode.ne.BMI_SUCCESS) then
@@ -27,7 +30,7 @@ contains
     real, pointer :: tref(:)
     integer :: code
 
-    status = m%initialize(config_file)
+    status = m%initialize(trim(config_file))
     status = m%get_grid_shape(grid_id, shape)
     status = m%get_grid_size(grid_id, size)
 

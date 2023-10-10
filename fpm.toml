@@ -1,0 +1,24 @@
+name = "bmiheatf"
+version = "1.0"
+license = "MIT"
+homepage = "https://bmi.readthedocs.io/"
+
+[library]
+source-dir = "bmi_heat"
+
+[[executable]]
+name = "run_bmiheatf"
+source-dir = "bmi_heat"
+main = "bmi_main.f90"
+
+[install]
+library = true
+
+[build]
+auto-executables = false
+auto-examples = true
+auto-tests = true
+
+[dependencies]
+heatf = { path = "heat" }
+bmif = { git = "https://github.com/csdms/bmi-fortran" }

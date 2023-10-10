@@ -6,7 +6,7 @@ program test_get_value_at_indices
 
   implicit none
 
-  character (len=*), parameter :: config_file = "sample.cfg"
+  character (len=256) :: config_file
   character (len=*), parameter :: var_name = "plate_surface__temperature"
   integer, parameter :: rank = 2
   integer, parameter, dimension(rank) :: shape = (/ 10, 5 /)
@@ -15,6 +15,9 @@ program test_get_value_at_indices
   real, parameter, dimension(shape(2)) :: &
        expected = (/ 0.0, 0.0, 0.0, 0.0, 0.0 /)
   integer :: retcode
+
+  ! Get the path to the config file from command line params
+  call get_command_argument(1, config_file)
 
   retcode = run_test()
   if (retcode.ne.BMI_SUCCESS) then
@@ -31,7 +34,7 @@ contains
 
     allocate(tval(size(indices)))
 
-    status = m%initialize(config_file)
+    status = m%initialize(trim(config_file))
     status = m%get_value_at_indices(var_name, tval, indices)
     status = m%finalize()
 

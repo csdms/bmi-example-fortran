@@ -5,7 +5,7 @@ program change_diffusivity
   use testing_helpers, only: print_array
   implicit none
 
-  character (len=*), parameter :: config_file = "test1.cfg"
+  character (len=256) :: config_file
   character (len=*), parameter :: &
        dname = "plate_surface__thermal_diffusivity"
   character (len=*), parameter :: &
@@ -17,6 +17,10 @@ program change_diffusivity
   integer, dimension(2) :: tdims
   real :: diffusivity(1), temperature(50)  
   integer :: status
+
+  ! Get the config file directory and create the path based on this
+  call get_command_argument(1, config_file)
+  config_file = trim(config_file) // "/test1.cfg"
   
   ! Run model to the end with alpha=1.0 (from cfg file).
   status = m%initialize(config_file)

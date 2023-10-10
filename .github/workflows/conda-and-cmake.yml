@@ -60,7 +60,7 @@ jobs:
 
       - name: Memcheck
         if: matrix.os == 'ubuntu-latest'
-        working-directory: ${{ github.workspace }}/examples
+        working-directory: ${{ github.workspace }}/example
         run: |
           sudo apt-get install -y valgrind
           valgrind \
