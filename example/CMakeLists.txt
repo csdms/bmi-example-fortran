@@ -15,10 +15,3 @@ make_example(get_value_ex)
 make_example(set_value_ex)
 make_example(conflicting_instances_ex)
 make_example(change_diffusivity_ex)
-
-# file(
-#   COPY ${CMAKE_CURRENT_SOURCE_DIR}/test1.cfg
-#   DESTINATION ${CMAKE_BINARY_DIR}/example)
-# file(
-#   COPY ${CMAKE_CURRENT_SOURCE_DIR}/test2.cfg
-#   DESTINATION ${CMAKE_BINARY_DIR}/example)
