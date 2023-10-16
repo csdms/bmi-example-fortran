@@ -7,6 +7,8 @@ project(bmi-example-fortran
   LANGUAGES Fortran
 )
 
+include(GNUInstallDirs)
+
 set(model_name heatf)
 set(bmi_name bmi${model_name})
 
