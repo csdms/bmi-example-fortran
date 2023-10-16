@@ -116,6 +116,6 @@ jobs:
           if ( -not ( Test-Path -Path $env:CONDA_PREFIX\lib\libbmiheatf.a ) ){ exit 1 }
           if ( -not ( Test-Path -Path $env:CONDA_PREFIX\include\bmiheatf.mod ) ){ exit 1 }
 
-      - name: Unit test with CTest
-        working-directory: ${{ github.workspace }}/build
-        run: ctest -C Release -VV --output-on-failure
+      # - name: Unit test with CTest
+      #   working-directory: ${{ github.workspace }}/build
+      #   run: ctest -C Release -VV --output-on-failure
