@@ -1,8 +1,11 @@
 # bmi-example-fortran
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.12)
 
-project(bmi-example-fortran Fortran)
+project(bmi-example-fortran
+  VERSION 2.0
+  LANGUAGES Fortran
+)
 
 set(model_name heatf)
 set(bmi_name bmi${model_name})
