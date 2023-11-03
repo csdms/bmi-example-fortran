@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.12)
 
 project(bmi-example-fortran
-  VERSION 2.0
+  VERSION 2.1.2
   LANGUAGES Fortran
 )
 
