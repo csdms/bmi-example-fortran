@@ -9,6 +9,7 @@ module bmiheatf
      private
      type (heat_model) :: model
    contains
+     procedure :: get_extensions
      procedure :: get_component_name => heat_component_name
      procedure :: get_input_item_count => heat_input_item_count
      procedure :: get_output_item_count => heat_output_item_count
@@ -98,7 +99,22 @@ module bmiheatf
        dimension(output_item_count) :: &
        output_items = (/'plate_surface__temperature'/)
 
+  ! Extensions
+  integer, parameter :: extension_count = 1
+  character (len=BMI_MAX_VAR_NAME), target, &
+       dimension(extension_count) :: &
+       extension_strings = (/'bmi_geospatial@bmiheatfgeo:bmi_heat_geo'/)
+
 contains
+
+  function get_extensions(this, extensions) result (bmi_status)
+    class (bmi_heat), intent(in) :: this
+    character (*), pointer, intent(out) :: extensions(:)
+    integer :: bmi_status
+
+    extensions => extension_strings
+    bmi_status = BMI_SUCCESS
+  end function get_extensions
 
   ! Get the name of the model.
   function heat_component_name(this, name) result (bmi_status)
