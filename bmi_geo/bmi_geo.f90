@@ -1,6 +1,6 @@
 ! BMI extension for geospatial data
 
-module bmi_geo
+module bmigeof
 
     implicit none
 
@@ -57,4 +57,4 @@ module bmi_geo
 
     end interface
 
-end module bmi_geo
+end module bmigeof
