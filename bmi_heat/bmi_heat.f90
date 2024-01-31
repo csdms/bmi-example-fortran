@@ -103,7 +103,7 @@ module bmiheatf
   integer, parameter :: extension_count = 1
   character (len=BMI_MAX_VAR_NAME), target, &
        dimension(extension_count) :: &
-       extension_strings = (/'bmi_geospatial@bmiheatfgeo:bmi_heat_geo'/)
+       extension_strings = (/'bmi_geospatial@bmiheatgeof:bmi_heat_geo'/)
 
 contains
 
