@@ -7,7 +7,7 @@ module bmigeof
     type, abstract :: bmi_geo
       contains
 
-        procedure(bmi_geo_initialize), deferred :: geo_initialize
+        procedure(bmi_geo_initialize), deferred :: initialize
         procedure(bmi_geo_get_grid_coordinate_names), deferred :: get_grid_coordinate_names
         procedure(bmi_geo_get_grid_coordinate_units), deferred :: get_grid_coordinate_units
         procedure(bmi_geo_get_grid_coordinate), deferred :: get_grid_coordinate

@@ -10,7 +10,7 @@ module bmiheatgeof
         private
         type (bmi_heat) :: bmi_base
     contains
-        procedure :: geo_initialize => heat_geo_initialize
+        procedure :: initialize => heat_initialize
         procedure :: get_grid_coordinate_names => heat_grid_coordinate_names
         procedure :: get_grid_coordinate_units => heat_grid_coordinate_units
         procedure :: get_grid_coordinate => heat_grid_coordinate
