@@ -24,16 +24,18 @@ module bmigeof
             integer :: bmi_status
         end function bmi_geo_initialize
 
-        function bmi_geo_get_grid_coordinate_names(this, names) result(bmi_status)
+        function bmi_geo_get_grid_coordinate_names(this, grid, names) result(bmi_status)
             import :: bmi_geo
             class(bmi_geo), intent(in) :: this
+            integer, intent(in) :: grid
             character(len=*), pointer, intent(out) :: names(:)
             integer :: bmi_status
         end function bmi_geo_get_grid_coordinate_names
 
-        function bmi_geo_get_grid_coordinate_units(this, units) result(bmi_status)
+        function bmi_geo_get_grid_coordinate_units(this, grid, units) result(bmi_status)
             import :: bmi_geo
             class(bmi_geo), intent(in) :: this
+            integer, intent(in) :: grid
             character(len=*), pointer, intent(out) :: units(:)
             integer :: bmi_status
         end function bmi_geo_get_grid_coordinate_units
