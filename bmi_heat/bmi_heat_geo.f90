@@ -53,7 +53,7 @@ contains
         integer :: bmi_status
 
         bmi_status = BMI_SUCCESS
-    end function heat_grid_x
+    end function heat_grid_coordinate
 
     function heat_grid_crs(this, grid, crs) result (bmi_status)
         class (bmi_heat_geo), intent(in) :: this
