@@ -4,6 +4,7 @@ module bmiheatgeof
 
     use bmigeof
     use bmiheatf
+    use bmif_2_0
     implicit none
 
     type, extends (bmi_geo) :: bmi_heat_geo
