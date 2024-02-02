@@ -11,7 +11,7 @@ else()
   add_library(${extension_name} SHARED bmi_heat_geo.f90)
 endif()
 target_link_libraries(${bmi_name} ${model_name} ${bmif_lib})
-target_link_libraries(${extension_name} ${bmi_name})
+target_link_libraries(${extension_name} ${bmi_name} ${bmigeof_lib})
 
 add_executable(run_${bmi_name} bmi_main.f90)
 target_link_libraries(run_${bmi_name} ${bmi_name})

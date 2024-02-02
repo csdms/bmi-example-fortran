@@ -25,12 +25,14 @@ message("-- BMIF module version - ${bmif_module_version}")
 set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/mod)
 
 # Locate the installed Fortran BMI bindings (bmif library and module file)
-# through CMAKE_PREFIX_PATH.
+# as well as bmi_geospatial extension through CMAKE_PREFIX_PATH.
 find_library(bmif_lib bmif)
+find_library(bmigeof_lib bmigeof)
 find_path(bmif_inc bmif_${bmif_module_version}.mod)
 include_directories(${bmif_inc})
 message("-- bmif_lib - ${bmif_lib}")
 message("-- bmif_inc - ${bmif_inc}")
+message("-- bmigeof_lib - ${bmigeof_lib}")
 
 add_subdirectory(heat)
 add_subdirectory(bmi_heat)
