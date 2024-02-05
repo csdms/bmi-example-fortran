@@ -1,7 +1,5 @@
 # bmi-heat
 
-set(extension_name bmiheatgeof)
-
 # Create shared library, except on Windows.
 if(WIN32)
   add_library(${bmi_name} bmi_heat.f90)

@@ -11,6 +11,7 @@ include(GNUInstallDirs)
 
 set(model_name heatf)
 set(bmi_name bmi${model_name})
+set(extension_name bmiheatgeof)
 
 # Determine the Fortran BMI version.
 if(DEFINED ENV{BMIF_VERSION})

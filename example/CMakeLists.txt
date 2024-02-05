@@ -15,4 +15,9 @@ make_example(get_value_ex)
 make_example(set_value_ex)
 make_example(conflicting_instances_ex)
 make_example(change_diffusivity_ex)
-make_example(bmi_geospatial_ex)
+
+# Extension example
+set(extension_example bmi_geospatial_ex)
+add_test(NAME ${extension_example} COMMAND ${extension_example} ${CMAKE_CURRENT_SOURCE_DIR})
+add_executable(${extension_example} ${extension_example}.f90 testing_helpers.f90)
+target_link_libraries(${extension_example} ${extension_name})
