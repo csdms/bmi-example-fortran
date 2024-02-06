@@ -28,10 +28,7 @@ program bmi_geospatial_ex
 
     allocate(grid_shape(grid_rank))
     status = h%get_grid_shape(grid_id, grid_shape)
-    write (*,"(a)") "Grid shape:"
-    do i = 1, size(grid_shape)
-      write (*,"(a, i3)") "-", grid_shape(i)
-    end do
+    write (*,"(a, *(x, i3))") "Grid shape:", grid_shape
 
     g = bmi_heat_geo(h)
 
@@ -51,13 +48,11 @@ program bmi_geospatial_ex
 
     allocate(ycoordinate(grid_shape(1)))
     status = g%get_grid_coordinate(grid_id, names(1), ycoordinate)
-    write (*,"(a)") "Y-coordinate:"
-    write (*,"(*(x, f4.1))") ycoordinate
+    write (*,"(a, *(x, f4.1))") "Y-coordinate:", ycoordinate
 
     allocate(xcoordinate(grid_shape(2)))
     status = g%get_grid_coordinate(grid_id, names(2), xcoordinate)
-    write (*,"(a)") "X-coordinate:"
-    write (*,"(*(x, f4.1))") xcoordinate
+    write (*,"(a, *(x, f4.1))") "X-coordinate:", xcoordinate
 
     status = g%get_grid_crs(grid_id, crs)
     write (*,"(a, a30)") "CRS: ", crs
