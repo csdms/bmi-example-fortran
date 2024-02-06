@@ -3,7 +3,7 @@
 # Create shared library, except on Windows.
 if(WIN32)
   add_library(${bmi_name} bmi_heat.f90)
-  add_library(${extension_name} bmi_heat_geo.f90)
+  add_library(${extension_name} bmi_geo_heat.f90)
 else()
   add_library(${bmi_name} SHARED bmi_heat.f90)
   add_library(${extension_name} SHARED bmi_geo_heat.f90)
