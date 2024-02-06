@@ -58,7 +58,27 @@ contains
         integer, intent(in) :: grid
         character(len=*), intent(in) :: coordinate
         double precision, dimension(:), intent(out) :: values
-        integer :: bmi_status
+        double precision, allocatable :: origin(:), spacing(:)
+        integer :: bmi_status, rank, dim, i
+
+        bmi_status = this%bmi_base%get_grid_rank(grid, rank)
+
+        allocate(origin(rank), spacing(rank))
+        bmi_status = this%bmi_base%get_grid_origin(grid, origin)
+        bmi_status = this%bmi_base%get_grid_spacing(grid, spacing)
+
+        select case(coordinate)
+        case("y")
+           dim = 1
+        case("x")
+           dim = 2
+        end select
+
+        do i = 1, size(values)
+            values(i) = dble(i - 1) * spacing(dim) + origin(dim)
+        end do
+
+        deallocate(origin, spacing)
 
         bmi_status = BMI_SUCCESS
     end function heat_grid_coordinate
