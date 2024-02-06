@@ -8,7 +8,6 @@ module bmiheatgeof
     implicit none
 
     type, extends (bmi_geo) :: bmi_heat_geo
-        private
         type (bmi_heat) :: bmi_base
     contains
         procedure :: initialize => heat_initialize
@@ -17,6 +16,8 @@ module bmiheatgeof
         procedure :: get_grid_coordinate => heat_grid_coordinate
         procedure :: get_grid_crs => heat_grid_crs
     end type bmi_heat_geo
+
+    public bmi_heat_geo
 
 contains
 
@@ -34,6 +35,9 @@ contains
         character (*), pointer, intent(out) :: names(:)
         integer :: bmi_status
 
+        names(1) = "y"
+        names(2) = "x"
+
         bmi_status = BMI_SUCCESS
     end function heat_grid_coordinate_names
 
@@ -42,6 +46,9 @@ contains
         integer, intent(in) :: grid
         character (*), pointer, intent(out) :: units(:)
         integer :: bmi_status
+
+        units(1) = "m"
+        units(2) = "m"
 
         bmi_status = BMI_SUCCESS
     end function heat_grid_coordinate_units
@@ -62,6 +69,7 @@ contains
         character (len=*), intent(out) :: crs
         integer :: bmi_status
 
+        crs = "none"
         bmi_status = BMI_SUCCESS
     end function heat_grid_crs
 
