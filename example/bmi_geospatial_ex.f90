@@ -3,11 +3,11 @@ program bmi_geospatial_ex
 
     use bmif_2_0
     use bmiheatf
-    use bmiheatgeof
+    use bmigeoheatf
     implicit none
 
     type(bmi_heat) :: h
-    type(bmi_heat_geo) :: g
+    type(bmi_geo_heat) :: g
     integer :: status, grid_id, grid_rank, i
     character (len=BMI_MAX_COMPONENT_NAME), pointer :: component_name
     integer, allocatable :: grid_shape(:)
@@ -30,7 +30,7 @@ program bmi_geospatial_ex
     status = h%get_grid_shape(grid_id, grid_shape)
     write (*,"(a, *(x, i3))") "Grid shape:", grid_shape
 
-    g = bmi_heat_geo(h)
+    g = bmi_geo_heat(h)
 
     allocate(names(grid_rank))
     status = g%get_grid_coordinate_names(grid_id, names)
