@@ -2,7 +2,7 @@
 
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/${bmi_name}.pc.cmake
-  ${CMAKE_BINARY_DIR}/bmi_heat/${bmi_name}.pc
+  ${CMAKE_CURRENT_BINARY_DIR}/${bmi_name}.pc
   @ONLY
 )
 
