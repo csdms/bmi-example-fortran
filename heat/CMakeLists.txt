@@ -1,5 +1,11 @@
 # heat
 
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/${model_name}.pc.cmake
+  ${CMAKE_BINARY_DIR}/heat/${model_name}.pc
+  @ONLY
+)
+
 # Create shared library, except on Windows.
 if(WIN32)
   add_library(${model_name} heat.f90)
@@ -23,4 +29,8 @@ install(
 install(
   FILES ${CMAKE_Fortran_MODULE_DIRECTORY}/${model_name}.mod
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+install(
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/${model_name}.pc
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
 )

@@ -1,5 +1,11 @@
 # bmi-heat
 
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/${bmi_name}.pc.cmake
+  ${CMAKE_BINARY_DIR}/bmi_heat/${bmi_name}.pc
+  @ONLY
+)
+
 # Create shared library, except on Windows.
 if(WIN32)
   add_library(${bmi_name} bmi_heat.f90)
@@ -24,4 +30,8 @@ install(
 install(
   FILES ${CMAKE_Fortran_MODULE_DIRECTORY}/${bmi_name}.mod
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+install(
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/${bmi_name}.pc
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
 )
