@@ -6,7 +6,7 @@ if(WIN32)
 else()
   add_library(${bmi_name} SHARED bmi_heat.f90)
 endif()
-target_link_libraries(${bmi_name} ${model_name} ${bmif_lib})
+target_link_libraries(${bmi_name} ${model_name} ${BMIF_LINK_LIBRARIES})
 
 add_executable(run_${bmi_name} bmi_main.f90)
 target_link_libraries(run_${bmi_name} ${bmi_name})
