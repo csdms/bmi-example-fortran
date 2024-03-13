@@ -117,10 +117,12 @@ jobs:
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\lib\libheatf.a ) ){ exit 1 }
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\bin\run_heatf.exe ) ){ exit 1 }
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\include\heatf.mod ) ){ exit 1 }
+          if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\lib\pkgconfig\heatf.pc ) ){ exit 1 }
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\bin\run_bmiheatf.exe ) ){ exit 1 }
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\lib\libbmiheatf.a ) ){ exit 1 }
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\include\bmiheatf.mod ) ){ exit 1 }
+          if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\lib\pkgconfig\bmiheatf.pc ) ){ exit 1 }
 
-      # - name: Unit test with CTest
-      #   working-directory: ${{ github.workspace }}/build
-      #   run: ctest -C Release -VV --output-on-failure
+      - name: Unit test with CTest
+        working-directory: ${{ github.workspace }}/build
+        run: ctest -C Release -VV --output-on-failure
