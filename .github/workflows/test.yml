@@ -54,6 +54,9 @@ jobs:
           test -h $CONDA_PREFIX/lib/libheatf${{ env.SHLIB_EXT }}
           test -f $CONDA_PREFIX/include/heatf.mod
           test -f $CONDA_PREFIX/lib/pkgconfig/heatf.pc
+          test -h $CONDA_PREFIX/lib/libbmiheatf${{ env.SHLIB_EXT }}
+          test -f $CONDA_PREFIX/include/bmiheatf.mod
+          test -f $CONDA_PREFIX/lib/pkgconfig/bmiheatf.pc
 
       - name: Run CTest
         working-directory: ${{ github.workspace }}/build
