@@ -14,6 +14,9 @@ jobs:
       run:
         shell: bash -l {0}
 
+    env:
+      SHLIB_EXT: ${{ matrix.os == 'ubuntu-latest' && '.so' || '.dylib' }}
+
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
@@ -46,7 +49,13 @@ jobs:
         working-directory: ${{ github.workspace }}/build
         run: cmake --build . --target install --config ${{ matrix.build-type }}
 
-      - name: Test
+      - name: Test for installed files
+        run: |
+          test -h $CONDA_PREFIX/lib/libheatf${{ env.SHLIB_EXT }}
+          test -f $CONDA_PREFIX/include/heatf.mod
+          test -f $CONDA_PREFIX/lib/pkgconfig/heatf.pc
+
+      - name: Run CTest
         working-directory: ${{ github.workspace }}/build
         run: ctest -C ${{ matrix.build-type }} --output-on-failure
 
@@ -112,7 +121,7 @@ jobs:
           cmake .. -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX="${{ env.LIBRARY_PREFIX }}" -DCMAKE_BUILD_TYPE=Release
           cmake --build . --target install --config Release
 
-      - name: Test installed files
+      - name: Test for installed files
         run: |
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\lib\libheatf.a ) ){ exit 1 }
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\bin\run_heatf.exe ) ){ exit 1 }
@@ -123,6 +132,6 @@ jobs:
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\include\bmiheatf.mod ) ){ exit 1 }
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\lib\pkgconfig\bmiheatf.pc ) ){ exit 1 }
 
-      - name: Unit test with CTest
+      - name: Run CTest
         working-directory: ${{ github.workspace }}/build
         run: ctest -C Release -VV --output-on-failure
