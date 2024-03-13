@@ -46,13 +46,13 @@ This example can be built on Linux, macOS, and Windows.
   in that repository.  You can choose to build them from source or
   install them through a conda binary. If using fpm, the binding
   will be automatically downloaded and built for you.
+* pkg-config
 
 ### CMake - Linux and macOS
 
 To build this example from source with CMake,
 using the current Fortran BMI version, run
 
-    export BMIF_VERSION=2.0
     mkdir _build && cd _build
     cmake .. -DCMAKE_INSTALL_PREFIX=<path-to-installation>
     make
@@ -80,12 +80,15 @@ The installation will look like
 |   |-- bmiheatf.mod
 |   `-- heatf.mod
 `-- lib
-    |-- libbmif.2.0.dylib
-    |-- libbmif.dylib -> libbmif.2.0.dylib
+    |-- libbmif.a
+    |-- libbmif.2.0.2.dylib
+    |-- libbmif.dylib -> libbmif.2.0.2.dylib
     |-- libbmiheatf.dylib
-    `-- libheatf.dylib
-
-3 directories, 9 files
+    |-- libheatf.dylib
+    `-- pkgconfig
+        |-- bmif.pc
+        |-- bmiheatf.pc
+        `-- heatf.pc
 ```
 
 From the build directory,
@@ -103,7 +106,6 @@ To configure this example from source with cmake
 using the current Fortran BMI version,
 run the following in a [Developer Command Prompt](https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs)
 
-    set "BMIF_VERSION=2.0"
     mkdir _build && cd _build
     cmake .. ^
 	  -G "NMake Makefiles" ^
