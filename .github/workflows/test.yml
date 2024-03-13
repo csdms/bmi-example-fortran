@@ -28,6 +28,7 @@ jobs:
           environment-name: testing
           create-args: >-
             cmake
+            pkg-config
             fortran-compiler
             bmi-fortran
 
@@ -79,6 +80,7 @@ jobs:
           environment-name: testing
           create-args: >-
             cmake
+            pkg-config
             cxx-compiler
           init-shell: >-
             powershell
