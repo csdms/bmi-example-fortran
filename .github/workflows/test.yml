@@ -84,7 +84,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ilammy/msvc-dev-cmd@v1
-      - uses: mamba-org/setup-micromamba@v1
+      - uses: mamba-org/setup-micromamba@v2
         with:
           micromamba-version: latest
           environment-name: testing
@@ -92,32 +92,19 @@ jobs:
             cmake
             pkg-config
             cxx-compiler
+            fortran-compiler
+            bmi-fortran
           init-shell: >-
             powershell
 
-      # The Fortran conda compiler doesn't seem to work on Windows in Actions.
-      # Instead, use the gfortran installed by chocolately. However, we then
-      # can't use the bmi-fortran package from conda-forge because it's not
-      # ABI-compatible. So, build bmi-fortran locally, This is a hack
-      # workaround.
-      - name: Build the bmi-fortran specification locally
+      - name: List current environment variables
         run: |
-            curl -o bmi-fortran.zip -L https://github.com/csdms/bmi-fortran/archive/refs/heads/master.zip
-            unzip bmi-fortran.zip
-            cd bmi-fortran-master
-            mkdir build && cd build
-            cmake .. -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX="${{ env.LIBRARY_PREFIX }}" -DCMAKE_BUILD_TYPE=Release
-            cmake --build . --target install --config Release  
-            cd ${{ github.workspace }}
+          ls env:
 
-      - name: Make cmake build directory
-        run: cmake -E make_directory build
-
-      - name: Configure, build, and install
-        working-directory: ${{ github.workspace }}/build
+      - name: Configure, build, and install project
         run: |
-          cmake .. -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX="${{ env.LIBRARY_PREFIX }}" -DCMAKE_BUILD_TYPE=Release
-          cmake --build . --target install --config Release
+          cmake -B ${{ env.BUILD_DIR }} -LA -G Ninja -DCMAKE_INSTALL_PREFIX="${{ env.LIBRARY_PREFIX }}" -DCMAKE_BUILD_TYPE=Release
+          cmake --build ${{ env.BUILD_DIR }} --target install --config Release
 
       - name: Test for installed files
         run: |
@@ -132,4 +119,4 @@ jobs:
 
       - name: Run CTest
         working-directory: ${{ github.workspace }}/build
-        run: ctest -C Release -VV --output-on-failure
+        run: ctest --test-dir ${{ env.BUILD_DIR }} -C Release -VV --output-on-failure
