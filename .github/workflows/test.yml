@@ -97,6 +97,10 @@ jobs:
           init-shell: >-
             powershell
 
+      - name: Set the FC environment variable to the Fortran conda compiler
+        run: |
+          echo "FC=$env:CONDA_PREFIX\Library\bin\flang-new.exe" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+
       - name: List current environment variables
         run: |
           ls env:
