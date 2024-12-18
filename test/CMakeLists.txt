@@ -2,9 +2,11 @@ include(CTest)
 
 include_directories(${CMAKE_Fortran_MODULE_DIRECTORY})
 
+add_library(fixtures OBJECT fixtures.f90)
+
 function(make_test test_name)
   add_test(NAME ${test_name} COMMAND ${test_name} "${CMAKE_CURRENT_SOURCE_DIR}/sample.cfg")
-  add_executable(${test_name} ${test_name}.f90 fixtures.f90)
+  add_executable(${test_name} ${test_name}.f90 $<TARGET_OBJECTS:fixtures>)
   target_link_libraries(${test_name} ${bmi_name})
 endfunction(make_test)
 
