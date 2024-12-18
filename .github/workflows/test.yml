@@ -92,7 +92,7 @@ jobs:
             cmake
             pkg-config
             cxx-compiler
-            flang>=19
+            fortran-compiler
             bmi-fortran
           init-shell: >-
             powershell
