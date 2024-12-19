@@ -112,12 +112,12 @@ jobs:
 
       - name: Test for installed files
         run: |
-          if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\lib\libheatf.a ) ){ exit 1 }
+          if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\lib\heatf.lib ) ){ exit 1 }
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\bin\run_heatf.exe ) ){ exit 1 }
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\include\heatf.mod ) ){ exit 1 }
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\lib\pkgconfig\heatf.pc ) ){ exit 1 }
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\bin\run_bmiheatf.exe ) ){ exit 1 }
-          if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\lib\libbmiheatf.a ) ){ exit 1 }
+          if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\lib\bmiheatf.lib ) ){ exit 1 }
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\include\bmiheatf.mod ) ){ exit 1 }
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\lib\pkgconfig\bmiheatf.pc ) ){ exit 1 }
 
