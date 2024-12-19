@@ -5,9 +5,7 @@
 
 An example of implementing the
 [Fortran bindings](https://github.com/csdms/bmi-fortran)
-for the CSDMS
-[Basic Model Interface](https://bmi-spec.readthedocs.io) (BMI).
-
+for the CSDMS [Basic Model Interface](https://bmi.csdms.io) (BMI).
 
 ## Overview
 
@@ -50,12 +48,11 @@ This example can be built on Linux, macOS, and Windows.
 
 ### CMake - Linux and macOS
 
-To build this example from source with CMake,
+To configure and build this example from source with CMake,
 using the current Fortran BMI version, run
 
-    mkdir _build && cd _build
-    cmake .. -DCMAKE_INSTALL_PREFIX=<path-to-installation>
-    make
+    cmake -B _build -DCMAKE_INSTALL_PREFIX=<path-to-installation>
+    cmake --build _build
 
 where `<path-to-installation>` is the base directory
 in which the Fortran BMI bindings have been installed
@@ -63,9 +60,9 @@ in which the Fortran BMI bindings have been installed
 When installing into a conda environment,
 use the `$CONDA_PREFIX` environment variable.
 
-Then, to install (on both Linux and macOS):
+Then, to install:
 
-    make install
+    cmake --install _build
 
 The installation will look like
 (on macOS, using v2.0 of the Fortran BMI specification):
@@ -81,8 +78,8 @@ The installation will look like
 |   `-- heatf.mod
 `-- lib
     |-- libbmif.a
-    |-- libbmif.2.0.2.dylib
-    |-- libbmif.dylib -> libbmif.2.0.2.dylib
+    |-- libbmif.2.1.4.dylib
+    |-- libbmif.dylib -> libbmif.2.1.4.dylib
     |-- libbmiheatf.dylib
     |-- libheatf.dylib
     `-- pkgconfig
@@ -91,10 +88,9 @@ The installation will look like
         `-- heatf.pc
 ```
 
-From the build directory,
-run unit tests and examples of using the sample implementation with
+Run unit tests and examples of using the sample implementation with
 
-    ctest
+    ctest --test-dir _build
 
 ### CMake - Windows
 
@@ -102,15 +98,12 @@ An additional prerequisite is needed for Windows:
 
 * Microsoft Visual Studio 2017 or Microsoft Build Tools for Visual Studio 2017
 
-To configure this example from source with cmake
+To configure and build this example from source with CMake
 using the current Fortran BMI version,
 run the following in a [Developer Command Prompt](https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs)
 
-    mkdir _build && cd _build
-    cmake .. ^
-	  -G "NMake Makefiles" ^
-	  -DCMAKE_INSTALL_PREFIX=<path-to-installation> ^
-	  -DCMAKE_BUILD_TYPE=Release
+    cmake -B _build -L -G Ninja -DCMAKE_INSTALL_PREFIX=<path-to-installation>
+	cmake --build _build
 
 where `<path-to-installation>` is the base directory
 in which the Fortran BMI bindings have been installed.
@@ -118,14 +111,13 @@ The default is `"C:\Program Files (x86)"`.
 Note that quotes and an absolute path are needed.
 When using a conda environment, use `"%CONDA_PREFIX%\Library"`.
 
-Then, to build and install:
+Then, to install:
 
-	cmake --build . --target install --config Release
+	cmake --install _build
 
-From the build directory,
-run unit tests and examples of using the sample implementation with
+Run unit tests and examples of using the sample implementation with
 
-    ctest
+    ctest --test-dir _build
 
 
 ### Fortran Package Manager (fpm)
