@@ -122,5 +122,4 @@ jobs:
           if ( -not ( Test-Path -Path ${{ env.LIBRARY_PREFIX }}\lib\pkgconfig\bmiheatf.pc ) ){ exit 1 }
 
       - name: Run CTest
-        working-directory: ${{ github.workspace }}/build
         run: ctest --test-dir ${{ env.BUILD_DIR }} -C Release -VV --output-on-failure
